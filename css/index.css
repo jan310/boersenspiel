@@ -12,12 +12,24 @@
     height: 100%;
 }
 
-#title {
-    background-color: pink;
+#mainTextWrapperPlaceholder {
+    background-color: gainsboro;
 }
 
 #navigationCardsContainer {
-    background-color: lightgray;
+    background-color: white;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#mainTextWrapper {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 20px;
+}
+
+#mainTextButton {
+    width: 200px;
 }
