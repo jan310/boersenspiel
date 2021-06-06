@@ -31,3 +31,7 @@ h1{
     margin-left: 2%;
     background-color: darkgoldenrod;
 }
+
+.textFeldDesign{
+    border: 1px solid black; 
+}
