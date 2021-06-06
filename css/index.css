@@ -16,13 +16,6 @@
     background-color: gainsboro;
 }
 
-#navigationCardsContainer {
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-}
 
 #mainTextWrapper {
     padding-left: 40px;
@@ -32,4 +25,19 @@
 
 #mainTextButton {
     width: 200px;
+}
+
+#navigationCardsContainer {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.navCard {
+    height: 80%;
+    width: 22%;
 }
