@@ -26,3 +26,8 @@ h1{
 #label1{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+#logIn{
+    margin-left: 2%;
+    background-color: darkgoldenrod;
+}
