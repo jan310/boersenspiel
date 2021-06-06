@@ -1,0 +1,23 @@
+
+#pageWrapper {
+    height: 100vh;
+    width: 100%;
+    display: grid;
+    grid-template-rows: max-content auto;
+}
+
+#pageContent {
+    display: grid;
+    grid-template-rows: 40% 60%;
+    height: 100%;
+}
+
+#title {
+    background-color: pink;
+}
+
+#navigationCardsContainer {
+    background-color: lightgray;
+    display: flex;
+    flex-direction: row;
+}
