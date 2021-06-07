@@ -7,33 +7,41 @@
   <link rel="stylesheet" href="../css/registrierung.css"/>
   <title>Test</title>
 </head>
-<body style="background-color: darkgray;">
+<body>
   <script src="../js/registrierung.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
-  <div class="window">
+  <div class="container">
     <h1>Registrierung</h1><br/>
     <div class="textFeld">Bitte füllen Sie das Formular aus, damit Sie zu unserem Börsenspiel zugelassen werden können.<br/>
       Felder mit einem * sind Pflichtfelder. </div><br/>
 
-      <form id="formLayout">
-        <label id="label1" for="firstName" class>Vorname*:</label><br/>
-        <input type="text" id="firstName" size="40" placeholder="Vorname" class="textFeldDesign"><br/><br/>
+
+      <form id="formLayout"></form>
+
+        <label id="label1" for="firstName" class="form-label">Vorname*:</label><br/>
+        <input type="text" id="firstName" placeholder="Vorname" class="form-control" required>
+        <span for="firstName" class="invalid-feedback">Pflichtfeld, bitte Vorname angeben</span><br/>
 
         <label id="label1" for="lastName" class>Nachname*:</label><br/>
-        <input type="text" id="lastName" size="40" placeholder="Nachname" class="textFeldDesign"><br/><br/>
+        <input type="text" id="lastName" placeholder="Nachname" class="form-control" required>
+        <span for="lastName" class="invalid-feedback">Pflichtfeld, bitte Nachname angeben</span><br/>
 
         <label id="label1" for="email" class>E-mail*:</label><br/>
-        <input type="email" id="email" size="40" placeholder="name@example.gmail" class="textFeldDesign"><br/><br/>
+        <input type="email" id="email" placeholder="name@example.gmail" class="form-control" required>
+        <span for="email" class="invalid-feedback">Email bitte eingeben</span><br/>
 
         <label id="label1" for="email2" class>E-mail überprüfung*:</label><br/>
-        <input type="email" id="email2" size="40" placeholder="name@example.gmail" class="textFeldDesign"><br/><br/>
+        <input type="email" id="email2" placeholder="name@example.gmail" class="form-control" required>
+        <span for="email2" class="invalid-feedback">Email bitte auf Gleichheit überprüfen</span><br/>
 
         <label id="label1" for="birthDate" class>Geburtsdatum:</label><br/>
-        <input type="date" id="birthDate" size="40" placeholder="xx.xx.xxxx" class="textFeldDesign"><br/><br/>
+        <input type="date" id="birthDate" placeholder="xx.xx.xxxx" class="form-control" required>
+        <span for="birthDate" class="invalid-feedback">Sie müssen 18-Jahre alt sein um Zugriff zu erhalten</span><br/>
 
         <label id="label1" for="post" class>Postleitzahl:</label><br/>
-        <input type="number" id="post" size="50" placeholder="73252" class="textFeldDesign"><br/><br/>
+        <input type="number" id="post" placeholder="12345" class="form-control" required>
+        <span for="post" class="invalid-feedback">Postleitzahl muss 5 Stellen besitzen</span><br/>
 
       </form>
 
