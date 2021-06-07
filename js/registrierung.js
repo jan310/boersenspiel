@@ -57,7 +57,7 @@ function examineAnswers(){
 
     if(succcses == true){
         //weiterleitung auf nächste Seite
-        
+        //alert("erfolgreich regestirert!")
     }
 }
 
