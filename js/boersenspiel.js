@@ -2,9 +2,11 @@ let myCanvas;
 let myCanvasContext;
 let interval;
 let priceHistory;
-let x;
+let currentX;
 let consecutiveRises;
 let consecutiveDrops;
+let scaleLow;
+let firstPriceIndexToBeShown;
 
 document.addEventListener("DOMContentLoaded", init);
 
@@ -14,27 +16,50 @@ function init() {
     myCanvasContext = myCanvas.getContext("2d");
     myCanvasContext.lineWidth = 3;
     priceHistory = [100.0];
-    x = 0;
+    currentX = 100;
     consecutiveRises = 0;
     consecutiveDrops = 0;
+    scaleLow = 80;
+    firstPriceIndexToBeShown = 0;
+    drawScale(80);
+}
+
+function drawScale(low) {
+    myCanvasContext.lineWidth = 1;
+    myCanvasContext.font = "50px Calibri";
+    myCanvasContext.fillStyle = "lightgray"; //font color
+    myCanvasContext.strokeStyle = "lightgray"; //line color
+
+    for (let i = 0; i < 5; i++) myCanvasContext.fillText(`${i*10+low}`, 5, 915-i*200); //draw horizontal lines
+
+    myCanvasContext.beginPath(); //draw scale numbers
+    for (let i = 1; i < 10; i++) {
+        myCanvasContext.moveTo(100, 100*i);
+        myCanvasContext.lineTo(2000, 100*i);
+    }
+    myCanvasContext.stroke();
 }
 
 function startGame() {
-    interval = setInterval(refreshStockChart, 100);
+    interval = setInterval(refreshChart, 100);
 }
 
-function refreshStockChart() {
+function refreshChart() {
+    myCanvasContext.strokeStyle = "black";
+    myCanvasContext.lineWidth = 3;
+
     priceHistory.push(getNewPrice());
-    if (x+10 > myCanvas.width) {
-        myCanvasContext.clearRect(0, 0, myCanvas.width, myCanvas.height);
-        x = 0;
+
+    if (currentX+10 > myCanvas.width) {
+        expandChartRight();
     }
+
     myCanvasContext.beginPath();
-    myCanvasContext.moveTo(x, getY(priceHistory[priceHistory.length-2]));
-    myCanvasContext.lineTo(x+=10, getY(priceHistory[priceHistory.length-1]));
+    myCanvasContext.moveTo(currentX, getY(priceHistory[priceHistory.length-2]));
+    myCanvasContext.lineTo(currentX+=10, getY(priceHistory[priceHistory.length-1]));
     myCanvasContext.stroke();
 
-    console.log(priceHistory[priceHistory.length-1]);
+    //console.log(priceHistory[priceHistory.length-1]);
 }
 
 function getY(price) {
@@ -73,4 +98,26 @@ function getNewPrice() {
             return Math.round((priceHistory[priceHistory.length-1] - difference) * 10) / 10;
         }
     }
+}
+
+function expandChartRight() {
+    firstPriceIndexToBeShown += 20;
+
+    let index = firstPriceIndexToBeShown;
+
+    myCanvasContext.clearRect(0, 0, myCanvas.width, myCanvas.height);
+    drawScale(scaleLow);
+
+    myCanvasContext.strokeStyle = "black";
+    myCanvasContext.lineWidth = 3;
+
+    myCanvasContext.beginPath();
+    for(let i = 0; i < 170; i++) {
+        myCanvasContext.moveTo(100+i*10, getY(priceHistory[index]));
+        myCanvasContext.lineTo(110+i*10, getY(priceHistory[++index]));
+
+    }
+    myCanvasContext.stroke();
+
+    currentX = 1800;
 }
