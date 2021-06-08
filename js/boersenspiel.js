@@ -6,7 +6,7 @@ let currentX;
 let consecutiveRises;
 let consecutiveDrops;
 let scaleLow;
-let firstPriceIndexToBeShown;
+let indexOfFirstPriceToBeDrawn;
 
 document.addEventListener("DOMContentLoaded", init);
 
@@ -14,56 +14,53 @@ function init() {
     document.getElementById("btnStart").addEventListener("click", startGame);
     myCanvas  = document.getElementById("myCanvas");
     myCanvasContext = myCanvas.getContext("2d");
-    myCanvasContext.lineWidth = 3;
     priceHistory = [100.0];
     currentX = 100;
     consecutiveRises = 0;
     consecutiveDrops = 0;
-    scaleLow = 80;
-    firstPriceIndexToBeShown = 0;
-    drawScale(80);
+    scaleLow = 75;
+    indexOfFirstPriceToBeDrawn = 0;
 }
 
-function drawScale(low) {
+function startGame() {
+    drawScale(scaleLow);
+    interval = setInterval(refreshChart, 100);
+}
+
+function drawScale(scaleLow) {
     myCanvasContext.lineWidth = 1;
     myCanvasContext.font = "50px Calibri";
     myCanvasContext.fillStyle = "lightgray"; //font color
     myCanvasContext.strokeStyle = "lightgray"; //line color
 
-    for (let i = 0; i < 5; i++) myCanvasContext.fillText(`${i*10+low}`, 5, 915-i*200); //draw horizontal lines
+    for (let i = 0; i < 5; i++) myCanvasContext.fillText(`${i*10+scaleLow+5}`, 10, 915-i*200); //draw scale numbers
 
-    myCanvasContext.beginPath(); //draw scale numbers
+    myCanvasContext.beginPath(); //draw horizontal lines
     for (let i = 1; i < 10; i++) {
         myCanvasContext.moveTo(100, 100*i);
-        myCanvasContext.lineTo(2000, 100*i);
+        myCanvasContext.lineTo(myCanvas.width-100, 100*i);
     }
     myCanvasContext.stroke();
-}
 
-function startGame() {
-    interval = setInterval(refreshChart, 100);
+    myCanvasContext.strokeStyle = "black"; //setup for drawing the chart
+    myCanvasContext.lineWidth = 3;
 }
 
 function refreshChart() {
-    myCanvasContext.strokeStyle = "black";
-    myCanvasContext.lineWidth = 3;
-
     priceHistory.push(getNewPrice());
 
-    if (currentX+10 > myCanvas.width) {
-        expandChartRight();
-    }
+    if (currentX === myCanvas.width-100) expandChartRight();
+
+    if (priceHistory[priceHistory.length-1] < scaleLow || priceHistory[priceHistory.length-1] > scaleLow+50) expandChartTopBottom();
 
     myCanvasContext.beginPath();
-    myCanvasContext.moveTo(currentX, getY(priceHistory[priceHistory.length-2]));
-    myCanvasContext.lineTo(currentX+=10, getY(priceHistory[priceHistory.length-1]));
+    myCanvasContext.moveTo(currentX, getY(scaleLow, priceHistory[priceHistory.length-2]));
+    myCanvasContext.lineTo(currentX+=10, getY(scaleLow, priceHistory[priceHistory.length-1]));
     myCanvasContext.stroke();
-
-    //console.log(priceHistory[priceHistory.length-1]);
 }
 
-function getY(price) {
-    return myCanvas.height + 75*20 - price * 20;
+function getY(scaleLow, price) {
+    return myCanvas.height + scaleLow*20 - price*20;
 }
 
 function getNewPrice() {
@@ -101,23 +98,36 @@ function getNewPrice() {
 }
 
 function expandChartRight() {
-    firstPriceIndexToBeShown += 20;
+    indexOfFirstPriceToBeDrawn++;
 
-    let index = firstPriceIndexToBeShown;
+    let index = indexOfFirstPriceToBeDrawn;
 
     myCanvasContext.clearRect(0, 0, myCanvas.width, myCanvas.height);
     drawScale(scaleLow);
 
-    myCanvasContext.strokeStyle = "black";
-    myCanvasContext.lineWidth = 3;
-
     myCanvasContext.beginPath();
-    for(let i = 0; i < 170; i++) {
-        myCanvasContext.moveTo(100+i*10, getY(priceHistory[index]));
-        myCanvasContext.lineTo(110+i*10, getY(priceHistory[++index]));
+    for (let i = 0; i < 180; i++) {
+        myCanvasContext.moveTo(100+i*10, getY(scaleLow, priceHistory[index]));
+        myCanvasContext.lineTo(110+i*10, getY(scaleLow, priceHistory[++index]));
 
     }
     myCanvasContext.stroke();
 
-    currentX = 1800;
+    currentX = myCanvas.width-110;
+}
+
+function expandChartTopBottom() {
+    myCanvasContext.clearRect(0, 0, myCanvas.width, myCanvas.height);
+
+    if (priceHistory[priceHistory.length-1] < scaleLow) drawScale(scaleLow-=10);
+    else drawScale(scaleLow+=10);
+
+    let index = indexOfFirstPriceToBeDrawn;
+
+    myCanvasContext.beginPath();
+    for (let i = 0; i < priceHistory.length-indexOfFirstPriceToBeDrawn; i++) {
+        myCanvasContext.moveTo(100+i*10, getY(scaleLow, priceHistory[index]));
+        myCanvasContext.lineTo(110+i*10, getY(scaleLow, priceHistory[++index]));
+    }
+    myCanvasContext.stroke();
 }
