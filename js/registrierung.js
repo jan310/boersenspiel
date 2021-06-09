@@ -33,7 +33,11 @@ function examineAnswers(){
         document.getElementById("email").classList.add('is-valid');
         document.getElementById("email2").classList.remove('is-invalid');
         document.getElementById("email2").classList.add('is-valid');
+        document.getElementById("emailID").style.visibility = "hidden";
+        document.getElementById("email2ID").style.visibility = "hidden";
     }else{
+        document.getElementById("emailID").style.visibility = "visible";
+        document.getElementById("email2ID").style.visibility = "visible";
         document.getElementById("email").classList.add('is-invalid');
         document.getElementById("email2").classList.add('is-invalid');
         succcses = false;
@@ -52,7 +56,9 @@ function examineAnswers(){
     if(countNumbers(post) >= 5){
         document.getElementById("post").classList.remove('is-invalid');
         document.getElementById("post").classList.add('is-valid');
+        document.getElementById("postID").style.visibility = "hidden";
     }else{
+        document.getElementById("postID").style.visibility = "visible";
         document.getElementById("post").classList.add('is-invalid');
         succcses = false;
     }
