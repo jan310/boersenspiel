@@ -42,7 +42,9 @@ function examineAnswers(){
     if(getAge() >= 18){
         document.getElementById("birthDate").classList.remove('is-invalid');
         document.getElementById("birthDate").classList.add('is-valid');
+        document.getElementById("birthDateID").style.visibility = "hidden";
     }else{
+        document.getElementById("birthDateID").style.visibility = "visible";
         document.getElementById("birthDate").classList.add('is-invalid');
         succcses = false;
     }
