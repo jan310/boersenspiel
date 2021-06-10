@@ -65,9 +65,7 @@ function examineAnswers(){
 
     if(succcses == true){
         //weiterleitung auf nächste Seite
-        alert("Weiterleitung");
-        let windowTest = window.open("", "Weiterleitung", "width=800,height=1200");
-        windowTest.document.write("<p>Das ist ein Window.</p>");
+        window.location.href="weiterleitung.html";
     }
 }
 
@@ -87,4 +85,8 @@ function getAge(){
 
 function countNumbers(i){
     return (i + "").length;
+}
+
+function routingGame(){
+    window.location.href="boersenspiel.html";
 }
