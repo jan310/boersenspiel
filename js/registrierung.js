@@ -65,7 +65,9 @@ function examineAnswers(){
 
     if(succcses == true){
         //weiterleitung auf nächste Seite
-        //alert("erfolgreich regestirert!")
+        alert("Weiterleitung");
+        let windowTest = window.open("", "Weiterleitung", "width=800,height=1200");
+        windowTest.document.write("<p>Das ist ein Window.</p>");
     }
 }
 
