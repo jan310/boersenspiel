@@ -65,7 +65,9 @@ function examineAnswers(){
 
     if(succcses == true){
         //weiterleitung auf nächste Seite
-        window.location.href="weiterleitung.html";
+        //window.location.href="weiterleitung.html";
+        var myModal = new bootstrap.Modal(document.getElementById('weiterleitungModal'), {backdrop: "static"})
+        myModal.show();
     }
 }
 
