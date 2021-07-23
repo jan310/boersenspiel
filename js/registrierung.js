@@ -1,10 +1,10 @@
 'use strict'
 
-let succcses = false;
+let success = false;
 
 function examineAnswers(){
 
-    succcses = true;
+    success = true;
 
     let fname = document.getElementById("firstName").value;
     let lname = document.getElementById("lastName").value;
@@ -14,7 +14,7 @@ function examineAnswers(){
 
     if(fname == ""){
         document.getElementById("firstName").classList.add('is-invalid');
-        succcses = false;
+        success = false;
     }else{
         document.getElementById("firstName").classList.remove('is-invalid');
         document.getElementById("firstName").classList.add('is-valid');
@@ -22,7 +22,7 @@ function examineAnswers(){
 
     if(lname == ""){
         document.getElementById("lastName").classList.add('is-invalid');
-        succcses = false;
+        success = false;
     }else{
         document.getElementById("lastName").classList.remove('is-invalid');
         document.getElementById("lastName").classList.add('is-valid');
@@ -40,30 +40,42 @@ function examineAnswers(){
         document.getElementById("email2ID").style.visibility = "visible";
         document.getElementById("email").classList.add('is-invalid');
         document.getElementById("email2").classList.add('is-invalid');
-        succcses = false;
+        success = false;
     }
 
-    if(getAge() >= 18){
+    if(!isNaN(getAge()) && getAge() >= 18){
         document.getElementById("birthDate").classList.remove('is-invalid');
         document.getElementById("birthDate").classList.add('is-valid');
         document.getElementById("birthDateID").style.visibility = "hidden";
-    }else{
-        document.getElementById("birthDateID").style.visibility = "visible";
-        document.getElementById("birthDate").classList.add('is-invalid');
-        succcses = false;
     }
 
-    if(countNumbers(post) == 5){
+    if(!isNaN(getAge()) && getAge() < 18){
+        document.getElementById("birthDateID").style.visibility = "visible";
+        document.getElementById("birthDate").classList.add('is-invalid');
+        success = false;
+    }
+
+    if(isNaN(getAge())){
+        document.getElementById("birthDateID").style.visibility = "hidden";
+    }
+
+    if(countNumbers(post) != 0 && countNumbers != 5){
+        document.getElementById("postID").style.visibility = "visible";
+        document.getElementById("post").classList.add('is-invalid');
+        success = false;
+    }
+
+    if(countNumbers(post) != 0 && countNumbers(post) == 5){
         document.getElementById("post").classList.remove('is-invalid');
         document.getElementById("post").classList.add('is-valid');
         document.getElementById("postID").style.visibility = "hidden";
-    }else{
-        document.getElementById("postID").style.visibility = "visible";
-        document.getElementById("post").classList.add('is-invalid');
-        succcses = false;
     }
 
-    if(succcses == true){
+    if(countNumbers(post) == 0){
+        document.getElementById("postID").style.visibility = "hidden";
+    }
+
+    if(success == true){
         //weiterleitung auf nächste Seite
         //window.location.href="weiterleitung.html";
         var myModal = new bootstrap.Modal(document.getElementById('weiterleitungModal'), {backdrop: "static"})
