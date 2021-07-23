@@ -53,7 +53,7 @@ function examineAnswers(){
         succcses = false;
     }
 
-    if(countNumbers(post) >= 5){
+    if(countNumbers(post) == 5){
         document.getElementById("post").classList.remove('is-invalid');
         document.getElementById("post").classList.add('is-valid');
         document.getElementById("postID").style.visibility = "hidden";
