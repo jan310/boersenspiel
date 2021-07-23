@@ -28,7 +28,7 @@ function examineAnswers(){
         document.getElementById("lastName").classList.add('is-valid');
     }
 
-    if(email == email2 && email != ""){
+    if(email == email2 && emailIsValid() == true){
         document.getElementById("email").classList.remove('is-invalid');
         document.getElementById("email").classList.add('is-valid');
         document.getElementById("email2").classList.remove('is-invalid');
@@ -91,4 +91,10 @@ function countNumbers(i){
 
 function routingGame(){
     window.location.href="boersenspiel.html";
+}
+
+function emailIsValid(){
+    let emailValidation = document.getElementById("email").value;
+
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(emailValidation)
 }
