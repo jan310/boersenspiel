@@ -28,17 +28,22 @@ function examineAnswers(){
         document.getElementById("lastName").classList.add('is-valid');
     }
 
-    if(email == email2 && emailIsValid() == true){
+    if(emailIsValid(email) == true){
         document.getElementById("email").classList.remove('is-invalid');
         document.getElementById("email").classList.add('is-valid');
-        document.getElementById("email2").classList.remove('is-invalid');
-        document.getElementById("email2").classList.add('is-valid');
         document.getElementById("emailID").style.visibility = "hidden";
-        document.getElementById("email2ID").style.visibility = "hidden";
     }else{
         document.getElementById("emailID").style.visibility = "visible";
-        document.getElementById("email2ID").style.visibility = "visible";
         document.getElementById("email").classList.add('is-invalid');
+        success = false;
+    }
+
+    if(email == email2 && emailIsValid(email2) == true){
+        document.getElementById("email2").classList.remove('is-invalid');
+        document.getElementById("email2").classList.add('is-valid');
+        document.getElementById("email2ID").style.visibility = "hidden";
+    }else{
+        document.getElementById("email2ID").style.visibility = "visible";
         document.getElementById("email2").classList.add('is-invalid');
         success = false;
     }
@@ -105,8 +110,8 @@ function routingGame(){
     window.location.href="boersenspiel.html";
 }
 
-function emailIsValid(){
-    let emailValidation = document.getElementById("email").value;
+function emailIsValid(emailValidation){
+    //emailValidation = document.getElementById("email").value;
 
     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(emailValidation)
 }
