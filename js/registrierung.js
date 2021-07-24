@@ -48,29 +48,41 @@ function examineAnswers(){
         success = false;
     }
 
-    if(!isNaN(getAge()) && getAge() >= 18){
+    // 3 Methoden um die Altersangabe als nicht Pflichtfeld darzustellen
+
+    //if(!isNaN(getAge()) && getAge() >= 18){
+    //    document.getElementById("birthDate").classList.remove('is-invalid');
+    //    document.getElementById("birthDate").classList.add('is-valid');
+    //    document.getElementById("birthDateID").style.visibility = "hidden";
+    //}
+
+    //if(!isNaN(getAge()) && getAge() < 18){
+    //    document.getElementById("birthDateID").style.visibility = "visible";
+    //    document.getElementById("birthDate").classList.add('is-invalid');
+    //    success = false;
+    //}
+
+    //if(isNaN(getAge())){
+    //    document.getElementById("birthDateID").style.visibility = "hidden";
+    //}
+
+    if(getAge() >= 18){
         document.getElementById("birthDate").classList.remove('is-invalid');
         document.getElementById("birthDate").classList.add('is-valid');
         document.getElementById("birthDateID").style.visibility = "hidden";
-    }
-
-    if(!isNaN(getAge()) && getAge() < 18){
+    }else{
         document.getElementById("birthDateID").style.visibility = "visible";
         document.getElementById("birthDate").classList.add('is-invalid');
         success = false;
     }
 
-    if(isNaN(getAge())){
-        document.getElementById("birthDateID").style.visibility = "hidden";
-    }
-
-    if(countNumbers(post) != 0 && countNumbers != 5){
+    if(countNumbers(post) != 0 && countNumbers(post) != 5){
         document.getElementById("postID").style.visibility = "visible";
         document.getElementById("post").classList.add('is-invalid');
         success = false;
     }
 
-    if(countNumbers(post) != 0 && countNumbers(post) == 5){
+    if(countNumbers(post) == 5){
         document.getElementById("post").classList.remove('is-invalid');
         document.getElementById("post").classList.add('is-valid');
         document.getElementById("postID").style.visibility = "hidden";
@@ -111,7 +123,6 @@ function routingGame(){
 }
 
 function emailIsValid(emailValidation){
-    //emailValidation = document.getElementById("email").value;
-
+    //Email validation mit regular expression
     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(emailValidation)
 }
