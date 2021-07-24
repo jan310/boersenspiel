@@ -1,21 +1,10 @@
-.window{
-    height: 1200px;
-    width: 1200px;
-    border: solid 1px black;
-    background-color:lightgray;
-}
 
 h1{
     margin-top: 1%;
-    margin-left: 2%;
-    color:darkgoldenrod;
-    font-size: 20;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .textFeld{
     color: darkgoldenrod;
-    margin-left: 2%;
     font-size: 16;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
@@ -25,4 +14,8 @@ h1{
 }
 #label1{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.textFeldDesign{
+    border: 1px solid black; 
 }
