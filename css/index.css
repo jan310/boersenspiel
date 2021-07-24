@@ -1,0 +1,62 @@
+
+#pageWrapper {
+    height: 100vh;
+    width: 100%;
+    display: grid;
+    grid-template-rows: max-content auto max-content;
+}
+
+#pageContent {
+    display: grid;
+    grid-template-rows: 40% 60%;
+    height: 100%;
+}
+
+#mainTextWrapperPlaceholder {
+    background-color: gainsboro;
+}
+
+#mainTextWrapper {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 20px;
+}
+
+#mainTextButton {
+    width: 200px;
+}
+
+#navigationCardsContainer {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#footerText {
+    margin-left: 2.5%;
+}
+
+.navCard {
+    height: 80%;
+    width: 22%;
+}
+
+.informationModal {
+    height: 80%;
+    width: 80%;
+    margin: 0;
+}
+
+.informationModalText {
+    overflow: hidden;
+}
+
+hr {
+    width: 95%;
+    align-self: center;
+    margin: auto;
+}
