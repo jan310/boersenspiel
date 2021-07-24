@@ -48,25 +48,7 @@ function examineAnswers(){
         success = false;
     }
 
-    // 3 Methoden um die Altersangabe als nicht Pflichtfeld darzustellen
-
-    //if(!isNaN(getAge()) && getAge() >= 18){
-    //    document.getElementById("birthDate").classList.remove('is-invalid');
-    //    document.getElementById("birthDate").classList.add('is-valid');
-    //    document.getElementById("birthDateID").style.visibility = "hidden";
-    //}
-
-    //if(!isNaN(getAge()) && getAge() < 18){
-    //    document.getElementById("birthDateID").style.visibility = "visible";
-    //    document.getElementById("birthDate").classList.add('is-invalid');
-    //    success = false;
-    //}
-
-    //if(isNaN(getAge())){
-    //    document.getElementById("birthDateID").style.visibility = "hidden";
-    //}
-
-    if(getAge() >= 18){
+    if(calculateOlderThen18()){
         document.getElementById("birthDate").classList.remove('is-invalid');
         document.getElementById("birthDate").classList.add('is-valid');
         document.getElementById("birthDateID").style.visibility = "hidden";
@@ -100,18 +82,20 @@ function examineAnswers(){
     }
 }
 
-function getAge(){
-    let today = new Date();
-    let birthDateUser = document.getElementById("birthDate").value;
-    let birthDate = new Date(birthDateUser);
+function calculateOlderThen18(){
+    let inputBirthDate = document.getElementById("birthDate").value;
+    let UserDate = new Date(inputBirthDate);
+    let currentDate = new Date();
 
-    let age = today.getFullYear() - birthDate.getFullYear();
-    let month = today.getMonth() - birthDate.getMonth();
+    let age = currentDate.getFullYear() - UserDate.getFullYear();
+    let month = currentDate.getMonth() - UserDate.getMonth();
+    
+    if(month < 0) age = age - 1; 
 
-    if(month < 0 || (month === 0 && today.getDate() < birthDate.getDate())){
-        age = age -1;
-    }
-    return age;
+    if(currentDate.getDate() < UserDate.getDate() && month == 0) age = age - 1;
+
+    if(age >= 18) return true;
+    if(age < 18) return false;
 }
 
 function countNumbers(i){
