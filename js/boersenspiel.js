@@ -2,6 +2,7 @@ let myCanvas;
 let myCanvasContext;
 let stockPrice;
 let interval;
+let countDownInterval;
 let priceHistory;
 let currentX;
 let consecutiveRises;
@@ -9,6 +10,8 @@ let consecutiveDrops;
 let scaleLow;
 let indexOfFirstPriceToBeDrawn;
 let candleStickView;
+let gameStarted;
+let gameCountDown;
 
 document.addEventListener("DOMContentLoaded", init);
 
@@ -24,11 +27,38 @@ function init() {
     scaleLow = 75;
     indexOfFirstPriceToBeDrawn = 0;
     candleStickView = false;
+    gameStarted = false;
+    gameCountDown = 300;
+    iterations = 0;
 }
 
 function startGame() {
-    drawScale();
-    interval = setInterval(refreshChart, 100);
+    if (!gameStarted) {
+        gameStarted = true;
+        countDownInterval = setInterval(refreshGameCountDown, 1000);
+        drawScale();
+        interval = setInterval(refreshChart, 100);
+    }
+}
+
+function refreshGameCountDown() {
+    gameCountDown--;
+
+    if (gameCountDown === 0 || priceEqualsZero()) {
+        clearInterval(countDownInterval);
+        clearInterval(interval);
+    }
+
+    let min;
+    let sec;
+
+    min = Math.floor(gameCountDown/60).toString();
+    sec = gameCountDown % 60;
+    if (sec < 10) {
+        sec = "0" + sec.toString();
+    }
+
+    document.getElementById("gameCountDown").innerText = `${min}:${sec}`;
 }
 
 function drawScale() {
@@ -63,6 +93,10 @@ function refreshChart() {
     myCanvasContext.moveTo(currentX, getY(priceHistory[priceHistory.length-2]));
     myCanvasContext.lineTo(currentX+=10, getY(priceHistory[priceHistory.length-1]));
     myCanvasContext.stroke();
+}
+
+function priceEqualsZero() {
+    if (priceHistory[priceHistory.length-1] <= 0) return true;
 }
 
 function getY(price) {
