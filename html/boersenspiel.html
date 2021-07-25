@@ -11,10 +11,14 @@
 <body>
 
 <div class="container">
+  <h1>Aktie: Max AG</h1>
   <div class="row">
-    <div class="col-sm-11">
-      <h1>Aktie: Max AG</h1>
+    <div class="col-sm-5 align-self-end">
       <h2 id="stockPrice">EUR 100.00</h2>
+    </div>
+    <div class="col-sm-6">
+      <h2 id="averageBuyingPrice">Kaufpreis (Ø):</h2>
+      <h2 id="numberOfStocks">Anzahl Aktien: 0</h2>
     </div>
     <div class="col-sm-1 align-self-end">
       <h2 id="gameCountDown">5:00</h2>
@@ -22,7 +26,35 @@
   </div>
 
   <canvas id="myCanvas" class="w-100 p3" width="2000" height="1000"></canvas>
-  <button id="btnStart" type="button" class="btn btn-primary">Spiel starten</button>
+
+  <div class="row">
+    <div class="col-sm-5 mt-1">
+      <button id="btnStart" type="button" class="btn btn-primary">Spiel starten</button>
+    </div>
+    <div class="col-sm-4 mt-1">
+      <button id="btnBuy" type="button" class="btn btn-primary">Kaufen</button>
+      <button id="btnSell" type="button" class="btn btn-primary">Verkaufen</button>
+    </div>
+    <div class="col-sm-3 mt-1">
+      <h2 id="budget">Budget: 1000,00€</h2>
+    </div>
+  </div>
+
+  <div id="gameOverInfo" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Game Over Info</h5>
+        </div>
+        <div class="modal-body">
+          <p id="infoText"></p>
+        </div>
+        <div class="modal-footer">
+          <button id="btnReset" type="button" class="btn btn-primary">Weiter</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
