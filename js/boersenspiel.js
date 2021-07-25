@@ -9,14 +9,19 @@ let consecutiveRises;
 let consecutiveDrops;
 let scaleLow;
 let indexOfFirstPriceToBeDrawn;
-let candleStickView;
 let gameStarted;
 let gameCountDown;
+let budget;
+let numberOfStocks;
+let buyingPrices;
 
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
     document.getElementById("btnStart").addEventListener("click", startGame);
+    document.getElementById("btnBuy").addEventListener("click", buy);
+    document.getElementById("btnSell").addEventListener("click", sell);
+    document.getElementById("btnReset").addEventListener("click", resetGame);
     myCanvas  = document.getElementById("myCanvas");
     myCanvasContext = myCanvas.getContext("2d");
     stockPrice = document.getElementById("stockPrice");
@@ -26,10 +31,11 @@ function init() {
     consecutiveDrops = 0;
     scaleLow = 75;
     indexOfFirstPriceToBeDrawn = 0;
-    candleStickView = false;
     gameStarted = false;
     gameCountDown = 300;
-    iterations = 0;
+    budget = 1000.00;
+    numberOfStocks = 0;
+    buyingPrices = [];
 }
 
 function startGame() {
@@ -47,6 +53,9 @@ function refreshGameCountDown() {
     if (gameCountDown === 0 || priceEqualsZero()) {
         clearInterval(countDownInterval);
         clearInterval(interval);
+        document.getElementById("infoText").innerText = `Das Spiel ist zu Ende. Sie haben nun ein Guthaben von ${getEndBudget()}€`;
+        let myModal = new bootstrap.Modal(document.getElementById("gameOverInfo"), {backdrop: "static"});
+        myModal.show();
     }
 
     let min;
@@ -170,4 +179,52 @@ function expandChartTopBottom() {
         myCanvasContext.lineTo(110+i*10, getY(priceHistory[++index]));
     }
     myCanvasContext.stroke();
+}
+
+function buy() {
+    if (budget >= priceHistory[priceHistory.length-1]) {
+        budget -= priceHistory[priceHistory.length-1];
+        numberOfStocks++;
+        buyingPrices.push(priceHistory[priceHistory.length-1]);
+        document.getElementById("numberOfStocks").innerText = `Anzahl Aktien: ${numberOfStocks}`;
+        document.getElementById("budget").innerText = `Budget: ${budget.toFixed(2)}€`;
+        document.getElementById("averageBuyingPrice").innerText = `Kaufpreis (Ø): ${getAverageBuyingPrice()}`;
+    }
+}
+
+function sell() {
+    if (numberOfStocks > 0) {
+        budget += priceHistory[priceHistory.length-1];
+        numberOfStocks--;
+        buyingPrices.shift();
+        document.getElementById("numberOfStocks").innerText = `Anzahl Aktien: ${numberOfStocks}`;
+        document.getElementById("budget").innerText = `Budget: ${budget.toFixed(2)}€`;
+        document.getElementById("averageBuyingPrice").innerText = `Kaufpreis (Ø): ${getAverageBuyingPrice()}`;
+    }
+}
+
+function getAverageBuyingPrice() {
+    let sum = 0;
+    buyingPrices.forEach(element => sum += element);
+    if (numberOfStocks > 0) return (sum / numberOfStocks).toFixed(2);
+    else return "-";
+}
+
+function getEndBudget() {
+    return (budget + (numberOfStocks*priceHistory[priceHistory.length-1])).toFixed(2);
+}
+
+function resetGame() {
+    priceHistory = [100.0];
+    currentX = 100;
+    consecutiveRises = 0;
+    consecutiveDrops = 0;
+    scaleLow = 75;
+    indexOfFirstPriceToBeDrawn = 0;
+    gameStarted = false;
+    gameCountDown = 300;
+    budget = 1000.00;
+    numberOfStocks = 0;
+    buyingPrices = [];
+    window.location.href="boersenspiel.html";
 }
