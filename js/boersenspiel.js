@@ -38,6 +38,9 @@ function init() {
     buyingPrices = [];
 }
 
+/**
+ * starts the game
+ */
 function startGame() {
     if (!gameStarted) {
         gameStarted = true;
@@ -47,6 +50,10 @@ function startGame() {
     }
 }
 
+/**
+ * refreshes the game countdown each second and informs the player at the end of the game
+ * game ends if the stock price drops down to 0€ or if five minutes are over
+ */
 function refreshGameCountDown() {
     gameCountDown--;
 
@@ -70,6 +77,9 @@ function refreshGameCountDown() {
     document.getElementById("gameCountDown").innerText = `${min}:${sec}`;
 }
 
+/**
+ * draws the background lines and the scale, depending the variable "scaleLow"
+ */
 function drawScale() {
     myCanvasContext.lineWidth = 1;
     myCanvasContext.font = "50px Calibri";
@@ -85,10 +95,13 @@ function drawScale() {
     }
     myCanvasContext.stroke();
 
-    myCanvasContext.strokeStyle = "black"; //setup for drawing the chart
+    myCanvasContext.strokeStyle = "black"; //resetting the drawing properties (setup for drawing the chart)
     myCanvasContext.lineWidth = 3;
 }
 
+/**
+ * draws the stock chart and updates the stock price each second
+ */
 function refreshChart() {
     priceHistory.push(getNewPrice());
 
@@ -96,6 +109,9 @@ function refreshChart() {
 
     if (priceHistory[priceHistory.length-1] < scaleLow || priceHistory[priceHistory.length-1] > scaleLow+50) expandChartTopBottom();
 
+    if (consecutiveRises === 3) stockPrice.style.color = "green";
+    else if (consecutiveDrops === 3) stockPrice.style.color = "red";
+    else stockPrice.style.color = "black";
     stockPrice.innerText = `EUR ${priceHistory[priceHistory.length-1].toFixed(2)}`;
 
     myCanvasContext.beginPath();
@@ -104,19 +120,29 @@ function refreshChart() {
     myCanvasContext.stroke();
 }
 
+/**
+ * returns true, if the current stock price is less than or equal to 0€
+ */
 function priceEqualsZero() {
     if (priceHistory[priceHistory.length-1] <= 0) return true;
 }
 
+/**
+ * returns the y-coordinate of the next point that has to be connected to to the stock chart
+ * depends on the given price and the current scale (and on the canvas resolution, but this shouldn't change)
+ */
 function getY(price) {
     return myCanvas.height + scaleLow*20 - price*20;
 }
 
+/**
+ * returns a new stock price
+ */
 function getNewPrice() {
     let random = Math.ceil(Math.random()*4); //random number between 1 and 4
     let difference = Math.ceil(Math.random()*9)/10; //random number between 0.1 and 0.9
 
-    if (consecutiveRises === 3) {
+    if (consecutiveRises === 3) { //if the stock price rose three consecutive times, the chance for further price gains increases to 75%
         if (random === 1) {
             consecutiveRises = 0;
             consecutiveDrops = 1;
@@ -124,7 +150,7 @@ function getNewPrice() {
         }
         else return Math.round((priceHistory[priceHistory.length-1] + difference) * 10) / 10;
     }
-    else if (consecutiveDrops === 3) {
+    else if (consecutiveDrops === 3) { //if the stock price dropped three consecutive times, the chance for further price losses increases to 75%
         if (random === 1) {
             consecutiveDrops = 0;
             consecutiveRises = 1;
@@ -132,7 +158,7 @@ function getNewPrice() {
         }
         else return Math.round((priceHistory[priceHistory.length-1] - difference) * 10) / 10;
     }
-    else {
+    else { //chances for price gains and drops during normal market periods are equal (50%)
         if (random === 1 || random === 2) {
             consecutiveDrops = 0;
             consecutiveRises++;
@@ -146,6 +172,10 @@ function getNewPrice() {
     }
 }
 
+/**
+ * if the chart reaches the right end of the canvas element, everything drawn on the canvas gets cleared
+ * then, a new scale gets drawn and the old chart gets drawn again, but moved one unit (10px) to the left
+ */
 function expandChartRight() {
     indexOfFirstPriceToBeDrawn++;
 
@@ -165,6 +195,10 @@ function expandChartRight() {
     currentX = myCanvas.width-110;
 }
 
+/**
+ * if the chart reaches the top or bottom end of the canvas element, everything drawn on the canvas gets cleared
+ * then, a new scale gets drawn and the old chart gets drawn again, but moved up or down, depending on the situation
+ */
 function expandChartTopBottom() {
     myCanvasContext.clearRect(0, 0, myCanvas.width, myCanvas.height);
 
@@ -181,6 +215,10 @@ function expandChartTopBottom() {
     myCanvasContext.stroke();
 }
 
+/**
+ * if the user has enough money, a new stock is added to the user's stock portfolio
+ * also, the budget and the average buying price is updated
+ */
 function buy() {
     if (budget >= priceHistory[priceHistory.length-1]) {
         budget -= priceHistory[priceHistory.length-1];
@@ -192,17 +230,23 @@ function buy() {
     }
 }
 
+/**
+ * one stock is removed from the user's stock portfolio and the budget and average buying price is updated
+ */
 function sell() {
     if (numberOfStocks > 0) {
         budget += priceHistory[priceHistory.length-1];
         numberOfStocks--;
-        buyingPrices.shift();
+        buyingPrices.shift(); //first in, first out: when shares are sold, the ones which were bought first also also sold first first
         document.getElementById("numberOfStocks").innerText = `Anzahl Aktien: ${numberOfStocks}`;
         document.getElementById("budget").innerText = `Budget: ${budget.toFixed(2)}€`;
         document.getElementById("averageBuyingPrice").innerText = `Kaufpreis (Ø): ${getAverageBuyingPrice()}`;
     }
 }
 
+/**
+ * returns the average buying price of the acquired stocks
+ */
 function getAverageBuyingPrice() {
     let sum = 0;
     buyingPrices.forEach(element => sum += element);
@@ -210,10 +254,16 @@ function getAverageBuyingPrice() {
     else return "-";
 }
 
+/**
+ * returns the total budget at the end of the game: the remaining budget plus the number of stocks held multiplied with the latest stock price
+ */
 function getEndBudget() {
     return (budget + (numberOfStocks*priceHistory[priceHistory.length-1])).toFixed(2);
 }
 
+/**
+ * resets all relevant variables to start a new game
+ */
 function resetGame() {
     priceHistory = [100.0];
     currentX = 100;
