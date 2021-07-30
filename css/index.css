@@ -8,7 +8,7 @@
 
 #pageContent {
     display: grid;
-    grid-template-rows: 40% 60%;
+    /* grid-template-rows: 40% 60%; */
     height: 100%;
 }
 
@@ -35,6 +35,7 @@
     align-items: center;
     padding-left: 10px;
     padding-right: 10px;
+    height: min-content;
 }
 
 #navigationCardsContainer .navCard {
