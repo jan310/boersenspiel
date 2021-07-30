@@ -30,19 +30,24 @@
     background-color: white;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
     padding-left: 10px;
     padding-right: 10px;
 }
 
-#footerText {
-    margin-left: 2.5%;
+#navigationCardsContainer .navCard {
+    height: min-content;
+    min-width: min-content;
+    max-width: 400px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    flex-grow: 1;
 }
 
-.navCard {
-    height: 80%;
-    width: 22%;
+#footerText {
+    margin-left: 2.5%;
 }
 
 .informationModal {
