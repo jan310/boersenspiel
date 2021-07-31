@@ -14,88 +14,84 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Startseite</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Kredite</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Konto</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Aktien</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Service
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li class="nav-item" data-bs-toggle="modal" data-bs-target="#privacyAgreementModal">
-                <a class="dropdown-item" href="#">Datenschutz</a>
-              </li>
-              <li class="nav-item" data-bs-toggle="modal" data-bs-target="#legalDisclosureModal">
-                <a class="dropdown-item" href="#">Impressum</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Kredite</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Konto</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Aktien</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Service
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li class="nav-item" data-bs-toggle="modal" data-bs-target="#privacyAgreementModal">
+                  <a class="dropdown-item" href="#">Datenschutz</a>
+                </li>
+                <li class="nav-item" data-bs-toggle="modal" data-bs-target="#legalDisclosureModal">
+                  <a class="dropdown-item" href="#">Impressum</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Suche" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Suchen</button>
+          </form>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <div id="pageContent">
-    
-    <div id="mainTextWrapperPlaceholder">
+    <div id="pageContent">
+      
       <div id="mainTextWrapper">
         <h1>Privatbank Mustermann</h1>
         <p>Diese Privatbank ist für ihre Finanzen, jetzt kostenlose Girokonto mit vielen Extras: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque habitant morbi tristique. Imperdiet nulla malesuada.</p>
         <button id="mainTextButton" type="button" class="btn btn-primary">Mehr Informationen »</button>
       </div>
 
-    </div>
-
-    <div id="navigationCardsContainer">
-      <div class="navCard">
-        <h2>Kredite</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque habitant morbi tristique. Imperdiet nulla malesuada.</p>
-        <button type="button" class="btn btn-secondary">Jetzt abschließen »</button>
+      <div id="navigationCardsContainer">
+        <div class="navCard">
+          <h2>Kredite</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque habitant morbi tristique. Imperdiet nulla malesuada.</p>
+          <button type="button" class="btn btn-secondary">Jetzt abschließen »</button>
+        </div>
+        <div class="navCard">
+          <h2>Girokonto <span class="badge bg-success">Neu</span></h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque habitant morbi tristique. Imperdiet nulla malesuada.</p>
+          <button type="button" class="btn btn-secondary">Jetzt eröffnen »</button>
+        </div>
+        <div class="navCard">
+          <h2>Aktien</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque habitant morbi tristique. Imperdiet nulla malesuada.</p>
+          <button type="button" class="btn btn-secondary">Jetzt investieren »</button>
+        </div>
+        <div class="navCard">
+          <h2>Börsenspiel</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque habitant morbi tristique. Imperdiet nulla malesuada.</p>
+          <button type="button" class="btn btn-warning">
+            <a class="nav-link" href="registrierung.html">Jetzt starten »</a>
+          </button>
+        </div>
       </div>
-      <div class="navCard">
-        <h2>Girokonto <span class="badge bg-success">Neu</span></h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque habitant morbi tristique. Imperdiet nulla malesuada.</p>
-        <button type="button" class="btn btn-secondary">Jetzt eröffnen »</button>
-      </div>
-      <div class="navCard">
-        <h2>Aktien</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque habitant morbi tristique. Imperdiet nulla malesuada.</p>
-        <button type="button" class="btn btn-secondary">Jetzt investieren »</button>
-      </div>
-      <div class="navCard">
-        <h2>Börsenspiel</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque habitant morbi tristique. Imperdiet nulla malesuada.</p>
-        <button type="button" class="btn btn-warning">
-          <a class="nav-link" href="registrierung.html">Jetzt starten »</a>
-        </button>
-      </div>
-    </div>
-  
-  </div>
-  
- 
-  <footer>
-    <hr>
-    <p id="footerText">© Privatbank Mustermann 2017-2019</p>
-  </footer>
     
-  
-</div>
+    </div>
+    
+    <footer>
+      <hr>
+      <p id="footerText">© Privatbank Mustermann 2017-2019</p>
+    </footer>
+      
+    
+  </div>
 
 <div id="privacyAgreementModal" class="modal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
